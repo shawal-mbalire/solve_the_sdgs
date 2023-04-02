@@ -1,3 +1,4 @@
+folium
 openai
 Pyrebase4
 python-dotenv
@@ -5,4 +6,5 @@ PyYAML
 requests
 streamlit
 streamlit_authenticator
+streamlit_folium
 streamlit_lottie
