@@ -283,8 +283,32 @@ def prescriptions():
         patients.to_csv("patient_data.csv", index=False)
         st.success("Medication Renewed Successfully!")
 def medical_records():
-    st.title("Medical Records")
-    st.write("Use this page to access and manage your patients' medical records, including test results, imaging scans, and other diagnostic information.")
+    # Page title and header text
+    st.write("<h1>Medical Records</h1>", unsafe_allow_html=True)
+    st.write("<p>Use this page to access and manage your patients' medical records, including test results, imaging scans, and other diagnostic information.</p>", unsafe_allow_html=True)
+
+    # Load patient data
+    patient_data = pd.read_csv("patient_data.csv")
+
+    # Display patient selection dropdown
+    selected_patient = st.selectbox("Select Patient", patient_data["Name"])
+
+    # Filter patient data by selected patient
+    selected_patient_data = patient_data[patient_data["Name"] == selected_patient]
+
+    # Display patient information
+    st.write(f"<h2>{selected_patient}</h2>", unsafe_allow_html=True)
+    st.write("<h3>Medical History</h3>", unsafe_allow_html=True)
+    try: st.write(selected_patient_data["Medical History"].iloc[0], unsafe_allow_html=True)
+    except: st.write("No medical history available")
+    try: st.write("<h3>Test Results</h3>", unsafe_allow_html=True)
+    except: st.write("No test results available")
+    try: st.write(selected_patient_data["Test Results"].iloc[0])
+    except: st.write("No test results available")
+    try: st.write("<h3>Imaging Scans</h3>", unsafe_allow_html=True)
+    except: st.write("No test results available")
+    try: st.write(selected_patient_data["Imaging Scans"].iloc[0], unsafe_allow_html=True)
+    except: st.write("No test results available")
 
 #creating authentication object
 authenticator = stauth.Authenticate(
